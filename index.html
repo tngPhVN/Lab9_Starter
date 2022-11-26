@@ -87,6 +87,14 @@
     </section>
   </main>
 
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+  window.TrackJS && TrackJS.install({ 
+    token: "db79c3e1468f432a94f791fadc9ab7f9"
+    // for more configuration options, see https://docs.trackjs.com
+  });
+</script>         
+
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -99,9 +107,102 @@
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
-
+   
     // Start your code here
     // You may move this JS to another file if you wish
+    let btnCount = 0; 
+    let week = 9; 
+    
+    // console log
+    errorBtns[0].addEventListener('click', (e) => {
+      console.log('Console Log Demo');
+    });
+    // console error
+    errorBtns[1].addEventListener('click', (e) => {
+      console.error('Console Error Demo');
+    });
+    // console count
+    errorBtns[2].addEventListener('click', (e) => {
+      btnCount++; 
+      console.log('Count Button: ' + btnCount); 
+    });
+    // console warn 
+    errorBtns[3].addEventListener('click', (e) => {
+      console.warn('Console Warn Demo'); 
+    });
+    // console assert 
+    errorBtns[4].addEventListener('click', (e) => {
+      console.assert(week == 11, "Still have 2 more weeks to go!");
+    });
+    // console clear
+    errorBtns[5].addEventListener('click', (e) => {
+      console.clear();
+    });
+    // console dir
+    errorBtns[6].addEventListener('click', (e) => {
+      console.dir(errorBtns[6]);
+    });
+    // console dirxml
+    errorBtns[7].addEventListener('click', (e) => {
+      console.dirxml(errorBtns[7]);
+    });
+    // console group start
+    errorBtns[8].addEventListener('click', (e) => {
+      console.group();
+    });
+    // console group end
+    errorBtns[9].addEventListener('click', (e) => {
+      console.groupEnd();
+    });
+    // console table
+    errorBtns[10].addEventListener('click', (e) => {
+      console.table(["CSE110", "CSE101", "CSE140","CSE140L"]);
+    });
+    // start timer
+    errorBtns[11].addEventListener('click', (e) => {
+      console.time();
+    });
+    // end timer
+    errorBtns[12].addEventListener('click', (e) => {
+      console.timeEnd();
+    });
+    // console trace
+    errorBtns[13].addEventListener('click', firstFunction);
+    function firstFunction(){
+      secondFunction();
+    }
+    function secondFunction(){
+      thirdFunction();
+    }
+    function thirdFunction(){
+      console.trace();
+    }
+    // trigger a global error
+    errorBtns[14].addEventListener('click', (e) => {
+      try{
+        boom;
+      }
+      catch(err){
+        throw new CustomError();
+      }
+      finally{
+        console.log('Hope will be no more bugs!');
+      }
+    }); 
+
+    TrackJS.track('Testing TrackJS!');
+    
+    window.addEventListener('error', (e) => {
+      console.log('Error happened again :)');
+    });
+
+    class CustomError extends Error {
+      constructor(message){
+        super(message);
+        this.name = "ThanhLab9Error";
+      }
+    }
+
   </script>
 </body>
 
